@@ -22,8 +22,6 @@ AppDataSource.initialize()
       })
     );
 
-    app.get("/", (req, res) => res.send("Express on Vercel"));
-
     app.use(bodyParser.json({ limit: '10mb' }));
     app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
     app.use(express.json());
