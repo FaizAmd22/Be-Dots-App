@@ -9,18 +9,22 @@ const bodyParser = require('body-parser');
 AppDataSource.initialize()
   .then(async () => {
     const app = express();
-    const PORT = process.env.PORT || 5000;
+    const PORT = 5000;
     // redisClient.on("error", (error) => console.log(error));
 
     app.use(
       cors({
         credentials: true,
-        origin: "http://localhost:5173",
+        origin: "*",
         methods: ["GET", "POST", "PATCH", "DELETE"],
         allowedHeaders: ["Origin", "Content-Type", "Authorization", "Accept"],
         preflightContinue: true,
       })
     );
+
+    app.get("/", (req, res) => {
+      res.send(`Hello, World! Express on Railways`);
+    });
 
     app.use(bodyParser.json({ limit: '10mb' }));
     app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
