@@ -1,6 +1,4 @@
 import { Router } from "express";
-import authController from "../controllers/authController";
-import * as multer from "multer";
 import UserControllers from "../controllers/UserController";
 import AuthMiddleware from "../middlewares/AuthMiddleware";
 import ThreadController from "../controllers/ThreadController";
@@ -8,6 +6,7 @@ import uploadFile from "../middlewares/uploadFile";
 import ReplyController from "../controllers/ReplyController";
 import LikeController from "../controllers/LikeController";
 import FollowController from "../controllers/FollowController";
+import authController from "../controllers/AuthController";
 
 const routes = Router();
 const uploadMiddleware = new uploadFile("image");
