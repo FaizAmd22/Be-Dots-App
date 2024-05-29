@@ -30,11 +30,6 @@ export default new (class AuthController {
 
     async logout(req: Request, res: Response) {
         try {
-            await redisClient.del("users");
-            await redisClient.del("threads");
-            await redisClient.del("follower");
-            await redisClient.del("following");
-            await redisClient.del("threadsWithAuth")
             return res.status(200).json({message: "Logout Success!"})
         } catch (error) {
             res.status(error.status).json({ message: error.message });
