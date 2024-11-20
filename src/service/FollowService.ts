@@ -4,7 +4,6 @@ import { AppDataSource } from "../data-source"
 import { Follow } from "../entities/Follow"
 import { User } from "../entities/User"
 import ResponseError from "../error/responseError"
-import { redisClient } from "../libs/redis"
 
 export default new (class FollowService {
     private readonly followRepository: Repository<Follow> = AppDataSource.getRepository(Follow)

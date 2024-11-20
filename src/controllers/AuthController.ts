@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-import ResponseError from "../error/responseError";
-import { redisClient } from "../libs/redis";
 import AuthService from "../service/AuthService";
 
 export default new (class AuthController {

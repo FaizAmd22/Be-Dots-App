@@ -4,7 +4,6 @@ import { AppDataSource } from "../data-source";
 import { Reply } from "../entities/Reply";
 import ResponseError from "../error/responseError";
 import cloudinary from "../libs/cloudinary";
-import { redisClient } from "../libs/redis";
 import { createReplySchema } from "../utils/validator/replyValidator";
 import LikeService from "./LikeService";
 

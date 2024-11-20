@@ -5,7 +5,6 @@ import * as bcrypt from "bcrypt";
 import ResponseError from "../error/responseError";
 import cloudinary from "../libs/cloudinary";
 import FollowService from "./FollowService";
-import { redisClient } from "../libs/redis";
 
 export default new (class UserService {
     private readonly UserRepostory: Repository<User> = AppDataSource.getRepository(User);

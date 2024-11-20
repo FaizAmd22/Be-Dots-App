@@ -3,7 +3,6 @@ import { Repository } from "typeorm"
 import { AppDataSource } from "../data-source"
 import { Like } from "../entities/Like"
 import ResponseError from "../error/responseError"
-import { redisClient } from "../libs/redis"
 import { createLikeReplySchema, createLikeThreadSchema } from "../utils/validator/likeValidator"
 
 export default new (class LikeService {
