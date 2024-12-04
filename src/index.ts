@@ -29,8 +29,13 @@ AppDataSource.initialize()
     app.use(express.json());
     app.use("/api/v1", routes);
 
-    app.listen(PORT, async () => {
-      console.log(`Server is running on port ${PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
     });
+
+    app.get("/test", (req, res) => {
+      res.send("Test route is working!");
+    });
+    
   })
   .catch((error) => console.log(error));
