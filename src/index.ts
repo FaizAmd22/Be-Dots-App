@@ -1,5 +1,5 @@
 import { AppDataSource } from "./data-source";
-import * as express from "express";
+import express = require('express');
 const cors = require('cors');
 import routes from "./routes";
 import "dotenv/config";
