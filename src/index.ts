@@ -1,6 +1,6 @@
 import { AppDataSource } from "./data-source";
 import * as express from "express";
-import * as cors from "cors";
+import cors = require('cors');
 import routes from "./routes";
 import "dotenv/config";
 const bodyParser = require('body-parser');
