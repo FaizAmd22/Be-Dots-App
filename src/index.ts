@@ -4,6 +4,11 @@ const cors = require('cors');
 import routes from "./routes";
 import "dotenv/config";
 import bodyParser = require("body-parser");
+const fs = require("fs");
+const path = require("path");
+
+// Debug untuk melihat struktur direktori
+console.log("Files in build directory:", fs.readdirSync(path.resolve(__dirname)));
 
 AppDataSource.initialize()
   .then(async () => {
