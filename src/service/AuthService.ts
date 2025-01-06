@@ -29,17 +29,17 @@ export default new (class AuthService {
 
             const get = await this.authrepository.findOne({ where: { username: value.username } });
 
-            const token = jwt.sign({ id: get.id, username: get.username }, process.env.SECRET_KEY, { expiresIn: "7d" });
+            const token = jwt.sign({ id: get?.id, username: get?.username }, process.env.SECRET_KEY!, { expiresIn: "7d" });
 
             return {
                 message: "Account created successfully",
                 user: {
-                    id: get.id,
-                    username: get.username,
+                    id: get?.id,
+                    username: get?.username,
                 },
                 token: token,
             };
-        } catch (error) {
+        } catch (error: any) {
             throw new ResponseError(500, error.message || "Something went wrong during registration");
         }
     }
@@ -58,7 +58,7 @@ export default new (class AuthService {
             const isEqual = await bcrypt.compare(value.password, userCheck.password);
             if (!isEqual) throw new ResponseError(401, "Username or Password is not correct!");
 
-            const token = jwt.sign({ id: userCheck.id, username: userCheck.username }, process.env.SECRET_KEY, { expiresIn: "7d" });
+            const token = jwt.sign({ id: userCheck.id, username: userCheck.username }, process.env.SECRET_KEY!, { expiresIn: "7d" });
 
             return {
                 message: "Login success",
@@ -68,7 +68,7 @@ export default new (class AuthService {
                 },
                 token: token,
             };
-        } catch (error) {
+        } catch (error: any) {
             throw new ResponseError(500, error.message || "Something went wrong during login");
         }
     }

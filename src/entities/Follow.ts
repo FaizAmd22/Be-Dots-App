@@ -4,17 +4,17 @@ import { User } from "./User";
 @Entity({ name: "follows" })
 export class Follow {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @ManyToOne(() => User, (user) => user.follower, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
     })
-    follower: User;
+    follower?: User;
 
     @ManyToOne(() => User, (user) => user.following, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
     })
-    following: User;
+    following?: User;
 }

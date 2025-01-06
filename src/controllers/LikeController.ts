@@ -7,7 +7,7 @@ export default new (class LikeController {
             const response = await LikeService.getLike(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -21,7 +21,7 @@ export default new (class LikeController {
             const response = await LikeService.getLikeThread(threadId, loginSession)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -31,7 +31,7 @@ export default new (class LikeController {
             const response = await LikeService.likeThread(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -41,7 +41,7 @@ export default new (class LikeController {
             const response = await LikeService.likeReply(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }

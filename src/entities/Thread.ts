@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { Like } from "./Like";
 import { Reply } from "./Reply";
@@ -6,29 +6,29 @@ import { Reply } from "./Reply";
 @Entity({ name: "threads" })
 export class Thread {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column({ length: 160, nullable: true })
-    content: string;
+    content?: string;
 
     @Column({ nullable: true })
-    image: string;
+    image?: string;
 
     @OneToMany(() => Like, (like) => like.thread)
-    likes: Like[];
+    likes?: Like[];
 
     @OneToMany(() => Reply, (reply) => reply.thread)
-    replies: Reply[];
+    replies?: Reply[];
 
     @ManyToOne(() => User, (user) => user.id, {
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
     })
-    author: User;
+    author?: User;
 
     @Column({ default: () => "NOW()" })
-    created_at: Date;
+    created_at!: Date;
 
     @Column({ default: () => "NOW()" })
-    updated_at: Date;
+    updated_at?: Date;
 }

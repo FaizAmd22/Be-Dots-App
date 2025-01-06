@@ -35,8 +35,8 @@ export default new (class UserService {
                         name: response[i].name,
                         username: response[i].username,
                         picture: response[i].picture,
-                        follower: response[i].following.length,
-                        following: response[i].follower.length,
+                        follower: response[i].following?.length,
+                        following: response[i].follower?.length,
                         bio: response[i].bio,
                         created_at: response[i].created_at,
                         cover_photo: response[i].cover_photo,
@@ -90,8 +90,8 @@ export default new (class UserService {
                     cover_photo: response.cover_photo,
                     created_at: response.created_at,
                     // isFollow: isFollow,
-                    following: response.follower.length,
-                    follower: response.following.length,
+                    following: response.follower?.length,
+                    follower: response.following?.length,
                     // thread: response.threads
                 };
                 // await redisClient.set("user", JSON.stringify(user));
@@ -139,8 +139,8 @@ export default new (class UserService {
                     cover_photo: response.cover_photo,
                     created_at: response.created_at,
                     isFollow: isFollow,
-                    following: response.follower.length,
-                    follower: response.following.length,
+                    following: response.follower?.length,
+                    follower: response.following?.length,
                     // thread: response.threads
                 };
                 // await redisClient.set("user", JSON.stringify(user));
@@ -176,8 +176,8 @@ export default new (class UserService {
                 picture: response.picture,
                 cover_photo: response.cover_photo,
                 created_at: response.created_at,
-                following: response.follower.length,
-                follower: response.following.length,
+                following: response.follower?.length,
+                follower: response.following?.length,
                 thread: response.threads
             }
 
@@ -253,7 +253,7 @@ export default new (class UserService {
                 where: { id }
             })
 
-            if (currentUser.picture == picture) return { message: "You don't change the picture" } 
+            if (currentUser?.picture == picture) return { message: "You don't change the picture" } 
             else {
                 cloudinary.upload()
                 const uploadPicture = await cloudinary.destination(picture);
@@ -280,7 +280,7 @@ export default new (class UserService {
                 where: { id }
             })
             
-            if (currentUser.cover_photo == cover) return { message: "You don't change the cover" }
+            if (currentUser?.cover_photo == cover) return { message: "You don't change the cover" }
             else {
                 cloudinary.upload()
                 const uploadCover = await cloudinary.destination(cover);
@@ -297,7 +297,7 @@ export default new (class UserService {
         }
     }
 
-    async delete(id: number, session: number, password) {
+    async delete(id: number, session: number, password: any) {
         try {
             if (session !== id) return { message: "You don't have permission to delete!" }
             
@@ -306,7 +306,7 @@ export default new (class UserService {
                 select: { password }
             })
 
-            const compared = await bcrypt.compare(password, user.password)
+            const compared = await bcrypt.compare(password, user!.password)
             if (!compared) return { message: "Password wrong!" }
             
             await this.UserRepostory.delete({ id })

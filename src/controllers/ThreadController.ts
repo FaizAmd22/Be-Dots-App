@@ -6,7 +6,7 @@ export default new (class ThreadController {
         try {
             const response = await ThreadService.getAll(req, res)
             return res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -15,7 +15,7 @@ export default new (class ThreadController {
         try {
             const response = await ThreadService.getAllWithAuth(req, res)
             return res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -24,7 +24,7 @@ export default new (class ThreadController {
         try {
             const response = await ThreadService.getThread(req, res)
             return res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -33,7 +33,7 @@ export default new (class ThreadController {
         try {
             const response = await ThreadService.getThreadWithAuth(req, res)
             return res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -43,7 +43,7 @@ export default new (class ThreadController {
             const response = await ThreadService.createThread(req, res);
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -53,7 +53,7 @@ export default new (class ThreadController {
             const response = await ThreadService.update(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -63,7 +63,7 @@ export default new (class ThreadController {
             const response = await ThreadService.delete(req.params, res.locals.session.id);
 
             return res.status(200).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json({ message: error.message });
         }
     }

@@ -35,8 +35,8 @@ export default new (class ThreadService {
                         id: response[i].id,
                         content: response[i].content,
                         image: response[i].image,
-                        likes: response[i].likes.length,
-                        replies: response[i].replies.length,
+                        likes: response[i].likes!.length,
+                        replies: response[i].replies!.length,
                         author: response[i].author,
                         created_at: response[i].created_at,
                         updated_at: response[i].updated_at,
@@ -85,8 +85,8 @@ export default new (class ThreadService {
                         image: response[i].image,
                         isLike: isLiked,
                         likedPerson: response[i].likes,
-                        likes: response[i].likes.length,
-                        replies: response[i].replies.length,
+                        likes: response[i].likes!.length,
+                        replies: response[i].replies!.length,
                         author: response[i].author,
                         created_at: response[i].created_at,
                         updated_at: response[i].updated_at,
@@ -124,16 +124,16 @@ export default new (class ThreadService {
             .getOne();
 
             const datas = {
-                id: response.id,
-                content: response.content,
-                image: response.image,
-                likes: response.likes.length,
-                likedPerson: response.likes,
-                replies: response.replies.length,
-                reply: response.replies,
-                author: response.author,
-                created_at: response.created_at,
-                updated_at: response.updated_at,
+                id: response!.id,
+                content: response!.content,
+                image: response!.image,
+                likes: response!.likes!.length,
+                likedPerson: response!.likes,
+                replies: response!.replies!.length,
+                reply: response!.replies,
+                author: response!.author,
+                created_at: response!.created_at,
+                updated_at: response!.updated_at,
             }
 
             return {
@@ -162,21 +162,21 @@ export default new (class ThreadService {
 
             const userId = res.locals.session.id
 
-            const isLiked = await LikeService.getLikeThread(response.id, userId)
-            const reply = await ReplyService.getReply(response.id, userId)
+            const isLiked = await LikeService.getLikeThread(response!.id, userId)
+            const reply = await ReplyService.getReply(response!.id, userId)
 
             const datas = {
-                id: response.id,
-                content: response.content,
-                image: response.image,
+                id: response!.id,
+                content: response!.content,
+                image: response!.image,
                 isLike: isLiked,
-                likes: response.likes.length,
-                likedPerson: response.likes,
-                replies: response.replies.length,
+                likes: response!.likes!.length,
+                likedPerson: response!.likes,
+                replies: response!.replies!.length,
                 reply,
-                author: response.author,
-                created_at: response.created_at,
-                updated_at: response.updated_at,
+                author: response!.author,
+                created_at: response!.created_at,
+                updated_at: response!.updated_at,
             }
 
             // await redisClient.del("users");
@@ -274,9 +274,9 @@ export default new (class ThreadService {
         })
         
         // console.log("oldData :", oldData);
-        console.log("author id :", oldData.author.id);
+        console.log("author id :", oldData!.author!.id);
         
-        if(oldData.author.id !== session) throw new ResponseError(403, "You don't have permission to update other people thread!");
+        if(oldData!.author!.id !== session) throw new ResponseError(403, "You don't have permission to update other people thread!");
 
         if (!req.file) {
             data = {
@@ -334,7 +334,7 @@ export default new (class ThreadService {
         const oldData = await this.threadRepository.findOne({ where: id, relations: { author: true } });
         if (!oldData) throw new ResponseError(404, "Not Found");
 
-        if (session !== oldData.author.id) throw new ResponseError(403, "Cannot delete another user's Thread");
+        if (session !== oldData.author!.id) throw new ResponseError(403, "Cannot delete another user's Thread");
 
         await this.threadRepository.delete(id);
         // await redisClient.del("users");

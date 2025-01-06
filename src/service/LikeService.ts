@@ -101,7 +101,7 @@ export default new (class LikeService {
         }
     }
 
-    async getLikeReply(replyId, authorId) {
+    async getLikeReply(replyId: any, authorId: any) {
         const chk = await this.likeRepository
             .createQueryBuilder("like")
             .where("like.reply = :reply", { reply: replyId })

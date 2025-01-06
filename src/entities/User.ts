@@ -7,41 +7,41 @@ import { Follow } from "./Follow";
 @Entity({ name: "users" })
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column({ length: 100 })
-    name: string;
+    name!: string;
 
     @Column({ length: 100 })
-    username: string;
+    username!: string;
 
     @Column({ length: 255, select: false })
-    password: string;
+    password!: string;
 
     @Column({ nullable: true })
-    picture: string;
+    picture?: string;
 
     @Column({ nullable: true })
-    cover_photo: string;
+    cover_photo?: string;
 
     @Column({ nullable: true })
-    bio: string;
+    bio?: string;
 
     @OneToMany(() => Follow, (follow) => follow.follower)
-    follower: Follow[];
+    follower?: Follow[];
 
     @OneToMany(() => Follow, (follow) => follow.following)
-    following: Follow[];
+    following?: Follow[];
 
     @OneToMany(() => Thread, (thread) => thread.author)
-    threads: Thread[];
+    threads?: Thread[];
 
     @OneToMany(() => Like, (like) => like.author)
-    likes: Like[];
+    likes?: Like[];
 
     @OneToMany(() => Reply, (reply) => reply.author)
-    replies: Reply[];
+    replies?: Reply[];
 
     @Column({ default: () => "NOW()" })
-    created_at: Date;
+    created_at!: Date;
 }

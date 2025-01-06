@@ -6,23 +6,23 @@ import { Reply } from "./Reply";
 @Entity({ name: "likes" })
 export class Like {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @ManyToOne(() => Thread, (thread) => thread.likes, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
     })
-    thread: Thread;
+    thread!: Thread;
 
     @ManyToOne(() => Reply, (reply) => reply.likes, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
     })
-    reply: Reply;
+    reply?: Reply;
 
     @ManyToOne(() => User, (user) => user.likes, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
     })
-    author: User;
+    author!: User;
 }

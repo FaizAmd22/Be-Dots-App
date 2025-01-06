@@ -6,38 +6,38 @@ import { Thread } from "./Thread";
 @Entity({ name: "replies" })
 export class Reply {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column({ length: 160, nullable: true })
-    content: string;
+    content?: string;
 
     @Column({ nullable: true })
-    image: string;
+    image?: string;
 
     @ManyToOne(() => Thread, (thread) => thread.replies, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     })
-    thread: Thread
+    thread?: Thread
         
     @ManyToOne(() => Reply, (reply) => reply.replies, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     })
-    reply: Reply
+    reply?: Reply
 
     @OneToMany(() => Like, (like) => like.reply)
-    likes: Like[];
+    likes?: Like[];
 
     @OneToMany(() => Reply, (reply) => reply.reply)
-    replies: Reply[]
+    replies?: Reply[]
 
     @ManyToOne(() => User, (user) => user.id, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     })
-    author: User
+    author?: User
 
     @Column({ default: () => "NOW()" })
-    created_at: Date;
+    created_at!: Date;
 }

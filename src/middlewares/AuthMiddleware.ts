@@ -12,7 +12,7 @@ export default new (class AuthMiddleware {
         const token = authHeader.split(" ")[1];
 
         try {
-            const verif = jwt.verify(token, process.env.SECRET_KEY);
+            const verif = jwt.verify(token, process.env.SECRET_KEY!);
             res.locals.session = verif;
 
             next();

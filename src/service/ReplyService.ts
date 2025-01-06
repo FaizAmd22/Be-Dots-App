@@ -47,8 +47,8 @@ export default new (class ReplyService {
                         content: response[i].content,
                         image: response[i].image,
                         isLike: isLiked,
-                        likes: response[i].likes.length,
-                        replies: response[i].replies.length,
+                        likes: response[i].likes!.length,
+                        replies: response[i].replies!.length,
                         author: response[i].author,
                         created_at: response[i].created_at,
                     });
@@ -86,9 +86,9 @@ export default new (class ReplyService {
                 id: response[i].id,
                 content: response[i].content,
                 image: response[i].image,
-                likes: response[i].likes.length,
+                likes: response[i].likes!.length,
                 isLike: isLike,
-                replies: response[i].replies.length,
+                replies: response[i].replies!.length,
                 author: response[i].author,
                 created_at: response[i].created_at,
             });
@@ -177,7 +177,7 @@ export default new (class ReplyService {
         const oldData = await this.replyRepository.findOne({ where: id, relations: { author: true } });
         if (!oldData) throw new ResponseError(404, "Reply Not Found");
 
-        if (session !== oldData.author.id) throw new ResponseError(403, "Cannot delete another user's Reply");
+        if (session !== oldData.author!.id) throw new ResponseError(403, "Cannot delete another user's Reply");
 
         await this.replyRepository.delete(id);
         // await redisClient.del("threadsWithAuth")

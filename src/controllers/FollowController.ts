@@ -7,7 +7,7 @@ export default new (class LikeController {
             const response = await FollowService.get(req.params.id)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -17,7 +17,7 @@ export default new (class LikeController {
             const response = await FollowService.follow(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
@@ -27,7 +27,7 @@ export default new (class LikeController {
             const response = await FollowService.unFollow(req, res)
 
             return res.status(201).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(error.status).json(error.message);
         }
     }
