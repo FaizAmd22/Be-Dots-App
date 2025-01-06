@@ -37,7 +37,8 @@
       "typeorm": "typeorm-ts-node-commonjs",
       "migrate:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/My-Migration -d ./src/data-source.ts",
       "migrate:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
-      "schema:drop": "npx typeorm-ts-node-commonjs schema:drop -d ./src/data-source.ts"
+      "schema:drop": "npx typeorm-ts-node-commonjs schema:drop -d ./src/data-source.ts",
+      "install-and-build": "npm install && npm run build"
    }
 
 }
