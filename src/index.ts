@@ -1,22 +1,12 @@
 import { AppDataSource } from "./data-source";
-const express = require("express"); // Gunakan import modern
-const cors = require("cors"); // Gunakan import modern
+import express = require('express');
+const cors = require('cors');
 import routes from "./routes";
 import "dotenv/config";
-const bodyParser = require("body-parser");
-const fs = require("fs");
-const path = require("path");
+import bodyParser = require("body-parser");
 
-// Debug untuk melihat struktur direktori
-console.log("Listing build directory contents:");
-console.log(fs.readdirSync(path.resolve(__dirname, ".")));
-
-// Inisialisasi TypeORM dan aplikasi Express
-const startServer = async () => {
-  try {
-    await AppDataSource.initialize();
-    console.log("Database connected!");
-
+AppDataSource.initialize()
+  .then(async () => {
     const app = express();
     const PORT = process.env.PORT || 5000;
 
@@ -31,32 +21,21 @@ const startServer = async () => {
     );
 
     app.get("/", (req, res) => {
-      res.send(`Hello, World! Express on Vercel`);
+      res.send(`Hello, World! Express on Railways`);
     });
 
-    app.use(bodyParser.json({ limit: "10mb" }));
-    app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+    app.use(bodyParser.json({ limit: '10mb' }));
+    app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
     app.use(express.json());
     app.use("/api/v1", routes);
-
-    app.get("/test", (req, res) => {
-      res.send("Test route is working!");
-    });
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
     });
 
-    // Ekspor aplikasi untuk platform seperti Vercel
-    return app;
-  } catch (error) {
-    console.error("Error initializing database or server:", error);
-    process.exit(1);
-  }
-};
-
-// Jalankan server hanya jika tidak dalam mode "test"
-startServer();
-
-// Ekspor aplikasi untuk platform seperti Vercel
-export default startServer;
+    app.get("/test", (req, res) => {
+      res.send("Test route is working!");
+    });
+    
+  })
+  .catch((error) => console.log(error));

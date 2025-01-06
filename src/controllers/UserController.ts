@@ -10,7 +10,7 @@ export default new (class UserController {
                 message: response.message,
                 data: response.data
             })
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -27,7 +27,7 @@ export default new (class UserController {
                 message: response.message,
                 data: response.data
             })
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -45,7 +45,7 @@ export default new (class UserController {
                 data: response.data
             })
             // return res.json({message: "getUserAuth success!"})
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -55,7 +55,7 @@ export default new (class UserController {
             const response = await userService.getCurrent(res.locals.session.id);
 
             res.status(200).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message });
         }
     }
@@ -68,7 +68,7 @@ export default new (class UserController {
             const response = await userService.search(res.locals.session.id);
             
             res.status(200).json(response);
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message });
         }
     }
@@ -81,7 +81,7 @@ export default new (class UserController {
                 req.body)
 
             res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -92,11 +92,11 @@ export default new (class UserController {
             const response = await userService.updatePicture(
                 parseInt(req.params.id),
                 res.locals.session.id,
-                req.file.filename)
+                req.file?.filename)
             // console.log("files :", req.file.filename);
             
             res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -107,11 +107,11 @@ export default new (class UserController {
             const response = await userService.updateCover(
                 parseInt(req.params.id),
                 res.locals.session.id,
-                req.file.filename)
+                req.file?.filename)
             // console.log("files :", req.file.filename);
             
             res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
@@ -125,7 +125,7 @@ export default new (class UserController {
             )
 
             res.status(200).json(response)
-        } catch (error) {
+        } catch (error: any) {
             return res.status(500).json({ message: error.message })
         }
     }
